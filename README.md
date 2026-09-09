@@ -7,14 +7,16 @@ only the .NET track.
 
 **The delivered starter stays on .NET 8. Your exercise is to assess, plan, and
 optionally execute an upgrade to .NET 10 with GitHub Copilot upgrade.**
-Installation is prework, not session work. A reviewed plan and a documented
-blocker are valid outcomes; finishing an upgrade is not guaranteed.
+Environment setup is prework. Installing the GitHub Copilot upgrade extension
+is a deliberate first lab step. A reviewed plan and a documented blocker are
+valid outcomes; finishing an upgrade is not guaranteed.
 
 All books and authors are fictional. There is no proprietary code, real-world
 data, authentication, persistent database, or external application service.
-No Windows-only APIs, Docker, Azure account, or paid infrastructure is needed.
-This unauthenticated, in-memory teaching API is for loopback use only, not
-production hosting.
+No Windows-only APIs, Azure account, or paid infrastructure is needed. The
+recommended Dev Containers path requires a local Docker-compatible container
+engine; a direct local SDK path remains available. This unauthenticated,
+in-memory teaching API is for loopback use only, not production hosting.
 
 ## Start here
 
@@ -29,14 +31,17 @@ not part of the exercise.
 
 ## Prerequisites and versions
 
-Use a supported Windows, macOS, or Linux installation with Git, VS Code,
-GitHub Copilot access, and the **GitHub Copilot upgrade** VS Code extension.
-Install both SDKs, not just runtimes. Copilot Free or a paid plan may provide
-access, subject to quotas and organization policy; no cloud subscription is
-required.
+Use a supported Windows, macOS, or Linux installation with Git, VS Code, and
+GitHub Copilot access. The recommended path opens this repository in its
+devcontainer, which supplies both .NET SDKs, C# tooling, and GitHub Copilot CLI.
+The local path installs both SDKs directly. Participants install the
+**GitHub Copilot upgrade** VS Code extension during the lab. Copilot Free or a
+paid plan may provide access, subject to quotas and organization policy; no
+cloud subscription is required.
 
 | Component | Workshop selection |
 | --- | --- |
+| Recommended environment | VS Code Dev Containers with a Docker-compatible engine |
 | Baseline SDK | **8.0.425**, selected exactly by `global.json` |
 | Baseline TFM / ASP.NET Core runtime | `net8.0` / 8.0.31 |
 | Participant target SDK / TFM | **10.0.401** / `net10.0` |
@@ -66,7 +71,8 @@ source-target pairing before using the lab after .NET 8 support ends.
 
 ## Quickstart
 
-After completing prework, clone using your authorized GitHub account:
+After completing prework, clone using your authorized GitHub account. Open the
+folder in its devcontainer, or use the local SDK path documented in prework:
 
 ```console
 git clone https://github.com/frye/dotnet-modernization-lab.git
@@ -113,6 +119,7 @@ BookCatalog.sln                       Three-project, .NET 8-readable solution
 global.json                          Exact SDK selection
 Directory.Build.props                Shared settings and NuGet lock generation
 NuGet.Config                         Public feed only
+.devcontainer/devcontainer.json      Reproducible SDK, CLI, and editor environment
 src/BookCatalog.Domain/               Immutable Book and in-memory BookStore
 src/BookCatalog.Api/                  Minimal API and creation request
 tests/BookCatalog.Api.Tests/          xUnit/WebApplicationFactory integration tests
@@ -143,11 +150,13 @@ A source-only snapshot with empty NuGet package and HTTP caches also passed
 locked restore, build, all 24 tests, and live HTTP smoke checks without changing
 the lock files. Details are recorded in the
 [facilitator evidence section](docs/facilitator.md#authoring-evidence).
-Windows, Linux, PowerShell examples, GitHub-hosted CI, VS Code extension setup,
-and an actual upgrade-agent rehearsal have **not** been executed during
-authoring. Cross-platform intent is not execution evidence. No .NET 10 upgrade
-has been performed or is claimed. Confirm those preparation items and that the
-public clone works before the workshop.
+The Ubuntu 24.04 ARM64 devcontainer was built and exercised with both SDKs,
+GitHub Copilot CLI, locked restore, build, all tests, and live HTTP checks.
+Windows, native Linux, PowerShell examples, GitHub-hosted CI, VS Code extension
+installation, and an actual upgrade-agent rehearsal have **not** been executed
+during authoring. Cross-platform intent is not execution evidence. No .NET 10
+upgrade has been performed or is claimed. Confirm those preparation items and
+that the public clone works before the workshop.
 
 This deliberately small app may need few source-code changes: the meaningful
 exercise is reviewing scope, SDK/framework/package alignment, lock-file changes,

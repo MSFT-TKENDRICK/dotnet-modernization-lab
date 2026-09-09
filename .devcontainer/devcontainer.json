@@ -1,0 +1,32 @@
+{
+  "name": ".NET modernization lab",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "features": {
+    "ghcr.io/devcontainers/features/dotnet:2": {
+      "version": "8.0.425",
+      "additionalVersions": "10.0.401"
+    },
+    "ghcr.io/devcontainers/features/copilot-cli:1": {
+      "version": "latest"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot-chat",
+        "ms-dotnettools.csharp"
+      ]
+    }
+  },
+  "forwardPorts": [
+    5080
+  ],
+  "portsAttributes": {
+    "5080": {
+      "label": "Book Catalog API",
+      "onAutoForward": "notify"
+    }
+  },
+  "postCreateCommand": "dotnet restore BookCatalog.sln --locked-mode",
+  "remoteUser": "vscode"
+}

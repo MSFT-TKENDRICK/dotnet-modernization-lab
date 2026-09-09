@@ -2,8 +2,9 @@
 
 This is the .NET track for a public application-modernization workshop.
 Attendees choose Java **or** .NET. Both use VS Code; do not import Windows,
-Visual Studio, .NET Framework, Azure, or Docker requirements from the broader
-inspiration workshops.
+Visual Studio, .NET Framework, or Azure requirements from the broader
+inspiration workshops. This repository's recommended path intentionally uses a
+Docker-compatible engine for its devcontainer; the local SDK path does not.
 
 ## Before distribution
 
@@ -14,7 +15,9 @@ with the owner: authoring does not authorize publication.
 Confirm that the public starter can be cloned without credentials. Public read
 access does not grant permission to push changes. Check organization
 restrictions on Copilot and extensions. Validate GitHub, Marketplace, Microsoft
-SDK-download, and NuGet connectivity on the workshop network.
+SDK-download, NuGet, Microsoft Container Registry, and GitHub Container Registry
+connectivity on the workshop network. Exercise both the devcontainer and local
+SDK paths if both will be supported.
 
 Recheck Microsoft's [installation instructions](https://learn.microsoft.com/en-us/dotnet/core/porting/github-copilot-upgrade/install?pivots=vscode)
 and [walkthrough](https://learn.microsoft.com/en-us/dotnet/core/porting/github-copilot-upgrade/how-to-upgrade-with-github-copilot)
@@ -24,11 +27,13 @@ No desktop workloads or cloud accounts are needed.
 
 ## Session checkpoints
 
-Use the 30-minute session as a practice block, not an installation clinic.
+Use the 30-minute session as a practice block, not an installation clinic. The
+bounded exception is installing GitHub Copilot upgrade so participants observe
+that part of the workflow; all other environment setup remains prework.
 
 | Segment | Checkpoint |
 | --- | --- |
-| Opening | Confirm track choice, baseline readiness, branch, and SDK 8.0.425; direct setup failures to blocker documentation |
+| Opening | Confirm track choice, baseline readiness, branch, and SDK 8.0.425; install and verify GitHub Copilot upgrade; direct other setup failures to blocker documentation |
 | Assessment practice | Launch `@upgrade` with explicit .NET 10 target and guided mode; inspect actual findings and proposed options |
 | Planning practice | Review all three projects, SDK pin, MVC Testing alignment, locks, validation, and scope exclusions before approving execution |
 | Optional execution | Inspect changes, run locked restore/build/test, repeat HTTP checks, and review real tasks/results |
@@ -49,13 +54,14 @@ necessary compatibility changes from unrelated "modernization" suggestions.
 | --- | --- |
 | Repository not found / clone denied | Confirm the public URL, repository availability, and network policy. The public starter needs no credentials to clone. Do not put tokens in URLs or change visibility as a troubleshooting shortcut. |
 | `dotnet` not found / exact SDK missing | Check `dotnet --list-sdks`, `dotnet --info`, and `command -v dotnet` or `Get-Command dotnet`. Install the pinned SDK; restart terminal/VS Code. Check architecture and competing SDK roots. |
+| Devcontainer build fails | Confirm the container engine is running and that Microsoft Container Registry, GitHub Container Registry, NuGet, and required HTTPS endpoints are allowed. Rebuild the container after correcting access; do not put registry credentials in repository files. |
 | Baseline selects 9/10 or a preview | Run from the repository root and inspect `global.json`, active `dotnet`, and local changes. Expected source selection is exactly 8.0.425. Do not remove the pin or relax roll-forward. |
 | Runtime missing despite an SDK being present | Check `dotnet --list-runtimes`, `DOTNET_ROOT`, and architecture. SDK listing and actual testhost runtime discovery must agree. Remove unintended runtime major-roll-forward overrides. |
 | `NETSDK1045` after target change | Update `global.json` to the verified installed .NET 10 SDK as an approved upgrade change; all three TFMs must agree. |
 | `NU1301`, TLS, proxy, or feed failure | Inspect `dotnet nuget list source` and restore output. The repo uses only nuget.org. Use approved network/proxy/certificate support; do not disable TLS or add secrets to config. |
 | `NU1004` / lock mismatch on baseline | Verify SDK 8.0.425 and an unchanged starter revision first. Do not regenerate locks to conceal an unexpected difference. |
 | Lock mismatch during approved upgrade | Review changed SDK/TFMs/package references, run `dotnet restore BookCatalog.sln --force-evaluate`, inspect locks, then return to `--locked-mode`. |
-| `@upgrade` missing / no response | Check exact extension name, installation/reload state, sign-in, Copilot entitlement/quota, and organization policy. Use the current VS Code instructions, not Java or Visual Studio setup. |
+| `@upgrade` missing / no response | Confirm the participant completed the lab's installation step for Microsoft `ms-dotnettools.upgrade-agent`, then check reload state, sign-in, Copilot entitlement/quota, and organization policy. Use the current VS Code instructions, not Java or Visual Studio setup. |
 | Agent runs ahead / proposes Azure or unrelated migrations | Say "pause," reaffirm guided stage boundaries and scope, inspect any changes, and revise options before execution. Do not blindly revert participant work. |
 | Port 5080 is in use | Stop only the known lab process with Ctrl+C, or choose another loopback port and update every HTTP example consistently. Do not kill unrelated processes. |
 | IDs or list counts differ in smoke test | Stop/restart this API, then run the request sequence once. Data is process-local and intentionally ephemeral. |
@@ -116,6 +122,7 @@ No scripted/fabricated agent reports are needed.
 | Item | Status |
 | --- | --- |
 | Baseline OS | macOS 26.6 ARM64 only |
+| Devcontainer | Ubuntu 24.04 ARM64 image built with SDKs 8.0.425 and 10.0.401 plus Copilot CLI 1.0.83; locked restore, Release build, 24 tests, and live HTTP checks passed |
 | SDK/runtime | Official SDK 8.0.425 / .NET and ASP.NET Core 8.0.31; archive SHA-512 verified; session-local install |
 | Dependencies | All three projects restored; lock files generated by SDK, then locked restore passed |
 | Build | Release build passed, zero warnings/errors |
@@ -124,7 +131,7 @@ No scripted/fabricated agent reports are needed.
 | Clean-source repeat | Passed locked restore, Release build, all 24 tests, and real HTTP smoke checks in a source-only snapshot without prior bin/obj, using empty NuGet package and HTTP caches; lock files remained unchanged |
 | SDK guard | The machine's .NET 9-only installation correctly refused the exact .NET 8 pin instead of rolling forward |
 | Dependency advisories | `dotnet list BookCatalog.sln package --vulnerable --include-transitive` reported no vulnerable packages from the current NuGet source; not a guarantee against future advisories |
-| Windows/Linux and PowerShell | Not executed during authoring |
+| Windows/native Linux and PowerShell | Not executed during authoring |
 | GitHub-hosted CI | Workflow provided, not executed during authoring |
 | VS Code setup and actual agent rehearsal | Not executed during authoring |
 | .NET 10 upgrade execution | Not performed; starter remains net8.0 |

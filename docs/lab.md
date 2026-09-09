@@ -2,8 +2,10 @@
 
 Complete [prework](prework.md) first. Work locally with fictional data only.
 This is the .NET option for the shared 30-minute session; there is no Java setup
-here. Spend the session practicing assessment, decision review, and validation,
-not installing tools. A reviewed plan plus a recorded blocker is a valid finish.
+here. The only planned installation is the GitHub Copilot upgrade extension in
+step 3; all environment dependencies belong in prework. Spend the rest of the
+session practicing assessment, decision review, and validation. A reviewed plan
+plus a recorded blocker is a valid finish.
 
 ## 1. Establish a baseline and working branch
 
@@ -92,10 +94,17 @@ exactly four books. Valid strings retain their original spacing.
 Stop the first terminal's server with Ctrl+C before upgrading or rerunning this
 sequence. Restarting resets data; tests independently create their own hosts.
 
-## 3. Launch the upgrade agent in guided mode
+## 3. Install and launch the upgrade agent in guided mode
 
-Open **GitHub Copilot Chat** in VS Code. Use `@upgrade` (or the `Upgrade` entry
-in the agent picker). Paste:
+Open Extensions in VS Code, search for **GitHub Copilot upgrade**, and install
+the extension published by Microsoft (`ms-dotnettools.upgrade-agent`), following
+any reload prompts. This installation is intentionally not included in the
+devcontainer or prework. It requires Marketplace access and a working GitHub
+Copilot sign-in.
+
+Open **GitHub Copilot Chat**. Confirm that `Upgrade` appears in the agent picker
+or that `@upgrade` is recognized. Then use `@upgrade` (or select `Upgrade`) and
+paste:
 
 ```text
 @upgrade Assess this BookCatalog.sln for an in-place upgrade from .NET 8 to

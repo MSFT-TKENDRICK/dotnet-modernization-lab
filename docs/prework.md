@@ -1,7 +1,9 @@
 # Prework: arrive ready to practice
 
-Complete setup and the baseline readiness check **before** the session. Choose
-Java or .NET, not both. This guide is only for the .NET track.
+Complete environment setup and the baseline readiness check **before** the
+session. Choose Java or .NET, not both. This guide is only for the .NET track.
+Do not install the GitHub Copilot upgrade extension yet; installing it is the
+first participant lab activity.
 
 ## 1. Confirm access and connectivity
 
@@ -24,7 +26,46 @@ Use organization-approved proxy/certificate configuration; never disable TLS
 verification or copy proxy credentials into the repository. A cached restore
 does not prove a new package can be downloaded during upgrade.
 
-## 2. Install Git and both .NET SDKs
+## 2. Choose a development environment
+
+The recommended path uses the repository's devcontainer. The local path remains
+available when a container engine is unavailable or prohibited. Use one path
+consistently for the readiness check and lab.
+
+### Recommended: Dev Containers
+
+Install [Git](https://git-scm.com/downloads), current stable
+[Visual Studio Code](https://code.visualstudio.com/), a Docker-compatible
+container engine supported by your organization, and the Microsoft
+**Dev Containers** VS Code extension. Start the engine, clone the repository,
+open its root in VS Code, and run **Dev Containers: Reopen in Container** from
+the Command Palette.
+
+The container installs exact .NET SDKs `8.0.425` and `10.0.401` side by side,
+GitHub Copilot CLI, the Microsoft C# extension, and GitHub Copilot Chat. It also
+runs the locked NuGet restore and forwards port 5080. Building the container
+requires access to Microsoft Container Registry and GitHub Container Registry,
+in addition to the services listed above. Container setup never stores a GitHub
+token in the repository or image.
+
+Inside the container terminal, verify:
+
+```console
+git --version
+dotnet --list-sdks
+dotnet --list-runtimes
+dotnet --info
+copilot --version
+```
+
+Both exact SDKs must appear, and `copilot` must be available. `global.json`
+still selects `8.0.425` from the repository root. Sign in to Copilot Chat with
+your authorized GitHub account. Copilot CLI authentication is user-specific;
+run `copilot` and use `/login` if you plan to use the optional CLI interface.
+Do not place a personal access token in `.devcontainer/devcontainer.json` or
+another repository file.
+
+### Alternative: local SDK installation
 
 Install [Git](https://git-scm.com/downloads), **.NET SDK 8.0.425**, and
 **.NET SDK 10.0.401** for your OS and CPU architecture. The source SDK is an exact
@@ -69,36 +110,38 @@ The source and target versions are different from the VS Code extension's own
 SDK needs. Automatic acquisition by an extension is not proof that either SDK is
 available to your terminal or selected by this repository.
 
-## 3. Install and check VS Code tooling
+Install [GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli)
+using an official method for your platform, then run `copilot --version`.
+Authentication is user-specific; use `/login` when you first run `copilot`.
+Never put a personal access token in the repository.
+
+## 3. Check VS Code and Copilot tooling
 
 Install the current stable [Visual Studio Code](https://code.visualstudio.com/)
-and use a supported OS. In Extensions (Ctrl+Shift+X, or Cmd+Shift+X on macOS):
+and use a supported OS. If you chose the local SDK path, in Extensions
+(Ctrl+Shift+X, or Cmd+Shift+X on macOS):
 
 1. Install **GitHub Copilot**, sign in, and confirm Copilot Chat is usable.
-2. Search for **GitHub Copilot upgrade** and install it, as described in the
-   [official VS Code setup](https://learn.microsoft.com/en-us/dotnet/core/porting/github-copilot-upgrade/install?pivots=vscode).
-   Follow any required dependency-install or reload prompts.
-3. The Microsoft **C#** extension is useful for editing and diagnostics; install
+2. The Microsoft **C#** extension is useful for editing and diagnostics; install
    it if needed. This lab does not require Visual Studio or C# Dev Kit.
 
-Open the cloned repository folder, review Workspace Trust prompts, and open
-Copilot Chat. Type `@upgrade` and confirm that it is recognized; the agent picker
-may also show `Upgrade`. Send this bounded setup check:
+The devcontainer requests both extensions automatically. In either environment,
+review Workspace Trust prompts and open Copilot Chat. Confirm ordinary Copilot
+Chat is usable with this bounded setup check:
 
 ```text
-@upgrade Confirm you are available for this .NET lab. Do not assess, change files,
-run an upgrade, or create commits yet.
+Summarize the purpose of this repository without changing files or running
+commands.
 ```
 
-If the agent is missing, resolve extension installation, sign-in, policy, or
-reload issues now. Do not substitute the Java modernization extension or
-Visual Studio's `@Modernize` instructions. The current Microsoft docs describe
-SDK acquisition, tool registration, and guided workflow support, but extension
-behavior must still be checked on the actual workshop machine.
+Do **not** install GitHub Copilot upgrade or test `@upgrade` during prework.
+Participants perform and observe that installation in the lab. Resolve GitHub
+Copilot installation, sign-in, policy, or reload issues now.
 
 Record your OS/architecture, VS Code version (Help > About), installed extension
-versions, source/target SDKs, and the setup-check result for the facilitator.
-Do not record credentials or tokens.
+versions, environment path (devcontainer or local), source/target SDKs, Copilot
+CLI version, and the setup-check result for the facilitator. Do not record
+credentials or tokens.
 
 ## 4. Clone and prove baseline readiness
 
@@ -129,14 +172,17 @@ Do not "fix" an SDK error by removing `global.json` or selecting .NET 10 early.
 Do not regenerate locks just to bypass a baseline locked-restore failure. First
 confirm SDK, repository revision, feed, and unchanged project/lock files.
 
-**Ready means:** baseline checks pass, both SDKs are visible, `@upgrade` responds,
-and repository/feed/Copilot access works. If any item is blocked, send the exact
-command, error, installed versions, and attempted fix to the facilitator. Do not
-spend the practice session reinstalling tooling.
+**Ready means:** baseline checks pass, both SDKs are visible, Copilot Chat works,
+Copilot CLI is present, and repository/feed/Marketplace access works. The
+GitHub Copilot upgrade extension should still be uninstalled. If any item is
+blocked, send the exact command, error, installed versions, and attempted fix to
+the facilitator.
 
 ## What has actually been tested
 
-The authoring CLI baseline was exercised on macOS 26.6 ARM64. Windows, Linux,
-PowerShell examples, and VS Code extension/agent behavior are documented from
-official guidance but have not been executed during authoring. See the
-[evidence and rehearsal requirements](facilitator.md#authoring-evidence).
+The authoring CLI baseline was exercised on macOS 26.6 ARM64. The Ubuntu 24.04
+ARM64 devcontainer was built and exercised through locked restore, Release
+build, all 24 tests, Copilot CLI discovery, and live HTTP checks. Windows,
+native Linux, PowerShell examples, VS Code extension installation, and upgrade
+agent behavior are documented from official guidance but have not been executed
+during authoring. See the [evidence and rehearsal requirements](facilitator.md#authoring-evidence).
