@@ -19,8 +19,10 @@ SDK-download, NuGet, Microsoft Container Registry, and GitHub Container Registry
 connectivity on the workshop network. Exercise both the devcontainer and local
 SDK paths if both will be supported.
 
-Recheck Microsoft's [installation instructions](https://learn.microsoft.com/en-us/dotnet/core/porting/github-copilot-upgrade/install?pivots=vscode)
-and [walkthrough](https://learn.microsoft.com/en-us/dotnet/core/porting/github-copilot-upgrade/how-to-upgrade-with-github-copilot)
+Recheck Microsoft's installation instructions for
+[VS Code](https://learn.microsoft.com/en-us/dotnet/core/porting/github-copilot-upgrade/install?pivots=vscode)
+and [GitHub Copilot CLI](https://learn.microsoft.com/en-us/dotnet/core/porting/github-copilot-upgrade/install?pivots=copilot-cli),
+plus the [walkthrough](https://learn.microsoft.com/en-us/dotnet/core/porting/github-copilot-upgrade/how-to-upgrade-with-github-copilot),
 for drift. Complete [prework](prework.md) on representative attendee machines.
 Do not rely on automatic SDK acquisition to supply the correct terminal SDK.
 No desktop workloads or cloud accounts are needed.
@@ -28,13 +30,14 @@ No desktop workloads or cloud accounts are needed.
 ## Session checkpoints
 
 Use the 30-minute session as a practice block, not an installation clinic. The
-bounded exception is installing GitHub Copilot upgrade so participants observe
-that part of the workflow; all other environment setup remains prework.
+bounded exception is installing GitHub Copilot upgrade for VS Code or Copilot
+CLI so participants observe that part of the workflow; all other environment
+setup remains prework.
 
 | Segment | Checkpoint |
 | --- | --- |
-| Opening | Confirm track choice, baseline readiness, branch, and SDK 8.0.425; install and verify GitHub Copilot upgrade; direct other setup failures to blocker documentation |
-| Assessment practice | Launch `@upgrade` with explicit .NET 10 target and guided mode; inspect actual findings and proposed options |
+| Opening | Confirm track choice, baseline readiness, branch, and SDK 8.0.425; choose, install, and verify the VS Code extension or Copilot CLI upgrade plugin; direct other setup failures to blocker documentation |
+| Assessment practice | Launch the selected upgrade agent with an explicit .NET 10 target and guided mode; inspect actual findings and proposed options |
 | Planning practice | Review all three projects, SDK pin, MVC Testing alignment, locks, validation, and scope exclusions before approving execution |
 | Optional execution | Inspect changes, run locked restore/build/test, repeat HTTP checks, and review real tasks/results |
 | Closing | State what was actually completed, retain the reviewed plan and blockers, and identify the next action |
@@ -61,7 +64,7 @@ necessary compatibility changes from unrelated "modernization" suggestions.
 | `NU1301`, TLS, proxy, or feed failure | Inspect `dotnet nuget list source` and restore output. The repo uses only nuget.org. Use approved network/proxy/certificate support; do not disable TLS or add secrets to config. |
 | `NU1004` / lock mismatch on baseline | Verify SDK 8.0.425 and an unchanged starter revision first. Do not regenerate locks to conceal an unexpected difference. |
 | Lock mismatch during approved upgrade | Review changed SDK/TFMs/package references, run `dotnet restore BookCatalog.sln --force-evaluate`, inspect locks, then return to `--locked-mode`. |
-| `@upgrade` missing / no response | Confirm the participant completed the lab's installation step for Microsoft `ms-dotnettools.upgrade-agent`, then check reload state, sign-in, Copilot entitlement/quota, and organization policy. Use the current VS Code instructions, not Java or Visual Studio setup. |
+| Upgrade agent missing / no response | For VS Code, confirm Microsoft `ms-dotnettools.upgrade-agent` is installed and check reload state. For Copilot CLI, repeat the documented `/plugin install upgrade-agent@upgrade-agent-plugins` command, inspect any error, and run `/agent` to find the agent. For either path, check sign-in, Copilot entitlement/quota, Marketplace access, and organization policy. Use the current instructions for the participant's chosen environment, not Java or Visual Studio setup. |
 | Agent runs ahead / proposes Azure or unrelated migrations | Say "pause," reaffirm guided stage boundaries and scope, inspect any changes, and revise options before execution. Do not blindly revert participant work. |
 | Port 5080 is in use | Stop only the known lab process with Ctrl+C, or choose another loopback port and update every HTTP example consistently. Do not kill unrelated processes. |
 | IDs or list counts differ in smoke test | Stop/restart this API, then run the request sequence once. Data is process-local and intentionally ephemeral. |
@@ -97,13 +100,15 @@ the original folder to get back to a green baseline.
 
 No agent rehearsal artifacts are included in this starter. Before the session,
 use a separate clone and branch of the actual distributed revision, with VS Code,
-the real upgrade extension, both SDKs, and the intended network/account policy.
+the real VS Code extension and Copilot CLI plugin, both SDKs, and the intended
+network/account policy.
 Follow the participant guide exactly, including the guided assessment/options/
 plan gates and Git strategy. Do not upgrade the distributed starter.
 
-Record baseline SHA, OS/architecture, VS Code and extension versions, SDKs,
-package versions, prompt, actual `.github/upgrades/{scenarioId}/` files, full
-diff including any agent commits, terminal commands, and real results. Preserve
+Record baseline SHA, OS/architecture, VS Code/extension and Copilot CLI/plugin
+versions, SDKs, package versions, prompt, actual
+`.github/upgrades/{scenarioId}/` files, full diff including any agent commits,
+terminal commands, and real results. Preserve
 blockers and partial outcomes without rewriting them as successes. Re-run
 build/tests and HTTP smoke checks on any actual upgraded rehearsal branch.
 
