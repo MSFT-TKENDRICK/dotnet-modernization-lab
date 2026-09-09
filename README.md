@@ -7,9 +7,9 @@ only the .NET track.
 
 **The delivered starter stays on .NET 8. Your exercise is to assess, plan, and
 optionally execute an upgrade to .NET 10 with GitHub Copilot upgrade.**
-Environment setup is prework. Installing the GitHub Copilot upgrade extension
-is a deliberate first lab step. A reviewed plan and a documented blocker are
-valid outcomes; finishing an upgrade is not guaranteed.
+Environment setup is prework. Installing GitHub Copilot upgrade for VS Code or
+GitHub Copilot CLI is a deliberate first lab step. A reviewed plan and a
+documented blocker are valid outcomes; finishing an upgrade is not guaranteed.
 
 All books and authors are fictional. There is no proprietary code, real-world
 data, authentication, persistent database, or external application service.
@@ -34,10 +34,10 @@ not part of the exercise.
 Use a supported Windows, macOS, or Linux installation with Git, VS Code, and
 GitHub Copilot access. The recommended path opens this repository in its
 devcontainer, which supplies both .NET SDKs, C# tooling, and GitHub Copilot CLI.
-The local path installs both SDKs directly. Participants install the
-**GitHub Copilot upgrade** VS Code extension during the lab. Copilot Free or a
-paid plan may provide access, subject to quotas and organization policy; no
-cloud subscription is required.
+The local path installs both SDKs directly. During the lab, participants install
+**GitHub Copilot upgrade** as either a VS Code extension or a GitHub Copilot CLI
+plugin. Copilot Free or a paid plan may provide access, subject to quotas and
+organization policy; no cloud subscription is required.
 
 | Component | Workshop selection |
 | --- | --- |
@@ -166,6 +166,7 @@ and retained behavior, not manufacturing upgrade drama.
 
 - [GitHub Copilot upgrade overview](https://learn.microsoft.com/en-us/dotnet/core/porting/github-copilot-upgrade/overview)
 - [VS Code installation](https://learn.microsoft.com/en-us/dotnet/core/porting/github-copilot-upgrade/install?pivots=vscode)
+- [GitHub Copilot CLI installation](https://learn.microsoft.com/en-us/dotnet/core/porting/github-copilot-upgrade/install?pivots=copilot-cli)
 - [Upgrade walkthrough](https://learn.microsoft.com/en-us/dotnet/core/porting/github-copilot-upgrade/how-to-upgrade-with-github-copilot)
 - [.NET downloads](https://dotnet.microsoft.com/en-us/download/dotnet) and [support policy](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core)
 - [ASP.NET Core integration testing (.NET 10)](https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-10.0)

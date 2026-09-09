@@ -2,8 +2,8 @@
 
 Complete environment setup and the baseline readiness check **before** the
 session. Choose Java or .NET, not both. This guide is only for the .NET track.
-Do not install the GitHub Copilot upgrade extension yet; installing it is the
-first participant lab activity.
+Do not install the GitHub Copilot upgrade extension or CLI plugin yet;
+installing one of them is the first participant lab activity.
 
 ## 1. Confirm access and connectivity
 
@@ -134,9 +134,10 @@ Summarize the purpose of this repository without changing files or running
 commands.
 ```
 
-Do **not** install GitHub Copilot upgrade or test `@upgrade` during prework.
-Participants perform and observe that installation in the lab. Resolve GitHub
-Copilot installation, sign-in, policy, or reload issues now.
+Do **not** install GitHub Copilot upgrade or test its agent during prework.
+Participants perform and observe either the VS Code extension or Copilot CLI
+plugin installation in the lab. Resolve GitHub Copilot installation, sign-in,
+policy, Marketplace, or reload issues now.
 
 Record your OS/architecture, VS Code version (Help > About), installed extension
 versions, environment path (devcontainer or local), source/target SDKs, Copilot
@@ -174,15 +175,16 @@ confirm SDK, repository revision, feed, and unchanged project/lock files.
 
 **Ready means:** baseline checks pass, both SDKs are visible, Copilot Chat works,
 Copilot CLI is present, and repository/feed/Marketplace access works. The
-GitHub Copilot upgrade extension should still be uninstalled. If any item is
-blocked, send the exact command, error, installed versions, and attempted fix to
-the facilitator.
+GitHub Copilot upgrade extension and CLI plugin should still be uninstalled. If
+any item is blocked, send the exact command, error, installed versions, and
+attempted fix to the facilitator.
 
 ## What has actually been tested
 
 The authoring CLI baseline was exercised on macOS 26.6 ARM64. The Ubuntu 24.04
 ARM64 devcontainer was built and exercised through locked restore, Release
 build, all 24 tests, Copilot CLI discovery, and live HTTP checks. Windows,
-native Linux, PowerShell examples, VS Code extension installation, and upgrade
-agent behavior are documented from official guidance but have not been executed
-during authoring. See the [evidence and rehearsal requirements](facilitator.md#authoring-evidence).
+native Linux, PowerShell examples, VS Code extension installation, Copilot CLI
+upgrade plugin installation, and upgrade agent behavior are documented from
+official guidance but have not been executed during authoring. See the
+[evidence and rehearsal requirements](facilitator.md#authoring-evidence).

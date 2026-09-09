@@ -1,11 +1,11 @@
-# Participant lab: .NET 8 to .NET 10 in VS Code
+# Participant lab: .NET 8 to .NET 10 with GitHub Copilot
 
 Complete [prework](prework.md) first. Work locally with fictional data only.
 This is the .NET option for the shared 30-minute session; there is no Java setup
-here. The only planned installation is the GitHub Copilot upgrade extension in
-step 3; all environment dependencies belong in prework. Spend the rest of the
-session practicing assessment, decision review, and validation. A reviewed plan
-plus a recorded blocker is a valid finish.
+here. The only planned installation is GitHub Copilot upgrade for VS Code or
+Copilot CLI in step 3; all environment dependencies belong in prework. Spend
+the rest of the session practicing assessment, decision review, and validation.
+A reviewed plan plus a recorded blocker is a valid finish.
 
 ## 1. Establish a baseline and working branch
 
@@ -96,23 +96,49 @@ sequence. Restarting resets data; tests independently create their own hosts.
 
 ## 3. Install and launch the upgrade agent in guided mode
 
-Open Extensions in VS Code, search for **GitHub Copilot upgrade**, and install
-the extension published by Microsoft (`ms-dotnettools.upgrade-agent`), following
-any reload prompts. This installation is intentionally not included in the
-devcontainer or prework. It requires Marketplace access and a working GitHub
+Choose one installation path. Neither installation is included in the
+devcontainer or prework. Both require Marketplace access and a working GitHub
 Copilot sign-in.
 
+### Option A: VS Code
+
+Open Extensions in VS Code, search for **GitHub Copilot upgrade**, and install
+the extension published by Microsoft (`ms-dotnettools.upgrade-agent`), following
+any reload prompts.
+
 Open **GitHub Copilot Chat**. Confirm that `Upgrade` appears in the agent picker
-or that `@upgrade` is recognized. Then use `@upgrade` (or select `Upgrade`) and
-paste:
+or that `@upgrade` is recognized. Select `Upgrade` in the agent picker.
+
+### Option B: GitHub Copilot CLI
+
+Start GitHub Copilot CLI:
+
+```console
+copilot
+```
+
+In the Copilot CLI chat, add Microsoft's plugin marketplace and install the
+upgrade agent:
+
+```console
+/plugin marketplace add microsoft/upgrade-agent-plugins
+/plugin install upgrade-agent@upgrade-agent-plugins
+```
+
+Run `/agent` and confirm that `upgrade-agent` appears in the agent list, then
+select it.
+
+With the upgrade agent selected in either environment, paste the following
+prompt. In VS Code, you can instead leave the current agent unchanged and prefix
+the first line with `@upgrade`.
 
 ```text
-@upgrade Assess this BookCatalog.sln for an in-place upgrade from .NET 8 to
-.NET 10. Use guided mode and remain in guided mode throughout. I have already
-created a working branch; use it. Do not execute upgrade changes until I have
-reviewed the assessment, upgrade options, and plan and explicitly approved
-execution. Do not commit unless I separately authorize a commit strategy.
-Do not push, publish, deploy, or change repository visibility.
+Assess this BookCatalog.sln for an in-place upgrade from .NET 8 to .NET 10. Use
+guided mode and remain in guided mode throughout. I have already created a
+working branch; use it. Do not execute upgrade changes until I have reviewed
+the assessment, upgrade options, and plan and explicitly approved execution.
+Do not commit unless I separately authorize a commit strategy. Do not push,
+publish, deploy, or change repository visibility.
 
 Keep all three projects and preserve the HTTP contracts and all meaningful tests.
 Use the installed stable .NET 10 SDK, update global.json explicitly, align
