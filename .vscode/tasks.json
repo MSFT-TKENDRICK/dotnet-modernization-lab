@@ -1,0 +1,91 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Book Catalog: Restore (locked)",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "restore",
+        "BookCatalog.sln",
+        "--locked-mode"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Book Catalog: Build",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "BookCatalog.sln",
+        "--configuration",
+        "Release",
+        "--no-restore"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "dependsOn": "Book Catalog: Restore (locked)",
+      "dependsOrder": "sequence",
+      "problemMatcher": "$msCompile",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Book Catalog: Run API",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "src/BookCatalog.Api/BookCatalog.Api.csproj",
+        "--configuration",
+        "Release",
+        "--no-build",
+        "--no-restore",
+        "--no-launch-profile",
+        "--urls",
+        "http://127.0.0.1:5080"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "dependsOn": "Book Catalog: Build",
+      "dependsOrder": "sequence",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Book Catalog: Test",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "test",
+        "BookCatalog.sln",
+        "--configuration",
+        "Release",
+        "--no-build",
+        "--no-restore"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "dependsOn": "Book Catalog: Build",
+      "dependsOrder": "sequence",
+      "problemMatcher": "$msCompile",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    }
+  ]
+}
