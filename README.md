@@ -1,6 +1,7 @@
 # .NET modernization lab
 
-A small, original ASP.NET Core book catalog for a **public modernization workshop**. In this 30-minute application-modernization session,
+A small, original ASP.NET Core book catalog for a **public .NET modernization
+workshop**. In this 30-minute application-modernization session,
 attendees choose **Java OR .NET**, both using VS Code. This repository contains
 only the .NET track.
 
@@ -21,10 +22,10 @@ production hosting.
 2. Follow the [participant lab](docs/lab.md) in VS Code.
 3. Facilitators: use the [checkpoints, troubleshooting, and rehearsal guide](docs/facilitator.md).
 
-**Access:** the repository was confirmed private during authoring. Before
-distribution, the owner must confirm attendee access or explicitly approve a
-visibility change. A clone URL does not grant access. Do not make it public,
-push, or publish as part of the exercise.
+**Access:** this starter is intended for public distribution. Cloning a public
+repository does not require an invitation or grant write access. Participants
+work on local branches; pushing, publishing, or changing repository settings is
+not part of the exercise.
 
 ## Prerequisites and versions
 
@@ -145,8 +146,8 @@ the lock files. Details are recorded in the
 Windows, Linux, PowerShell examples, GitHub-hosted CI, VS Code extension setup,
 and an actual upgrade-agent rehearsal have **not** been executed during
 authoring. Cross-platform intent is not execution evidence. No .NET 10 upgrade
-has been performed or is claimed. Confirm those preparation items and attendee
-access before the workshop.
+has been performed or is claimed. Confirm those preparation items and that the
+public clone works before the workshop.
 
 This deliberately small app may need few source-code changes: the meaningful
 exercise is reviewing scope, SDK/framework/package alignment, lock-file changes,

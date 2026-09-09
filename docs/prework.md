@@ -5,14 +5,14 @@ Java or .NET, not both. This guide is only for the .NET track.
 
 ## 1. Confirm access and connectivity
 
-Use your own authorized GitHub account. Confirm that you can view
+Confirm that you can view
 [`frye/dotnet-modernization-lab`](https://github.com/frye/dotnet-modernization-lab)
-and clone it. The repository is private at authoring; accept any invitation
-and complete required organization authentication before attending. If it is
-inaccessible, contact the facilitator. Do not embed access tokens in clone URLs
-or repository files.
+and clone it. The public starter does not require an invitation or a token to
+clone. If it is inaccessible, contact the facilitator. Do not embed access
+tokens in clone URLs or repository files.
 
-Confirm GitHub Copilot access in VS Code. Microsoft's installation instructions
+Use your own authorized GitHub account for GitHub Copilot in VS Code.
+Microsoft's installation instructions
 allow Free or paid subscriptions, but quota exhaustion, organization policies,
 or extension restrictions can still prevent use. Arrange approved access in
 advance; an Azure account is not required.

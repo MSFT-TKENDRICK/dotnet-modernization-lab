@@ -1,6 +1,6 @@
 # Facilitator guide
 
-This is the .NET alternative for a public modernization workshop.
+This is the .NET track for a public application-modernization workshop.
 Attendees choose Java **or** .NET. Both use VS Code; do not import Windows,
 Visual Studio, .NET Framework, Azure, or Docker requirements from the broader
 inspiration workshops.
@@ -11,9 +11,8 @@ Confirm the repository contains the intended .NET 8 starter revision, not a
 participant-upgraded branch. Coordinate any commit/push/distribution separately
 with the owner: authoring does not authorize publication.
 
-Confirm attendee access with the actual attendee accounts. If private-repository
-access cannot be arranged, obtain explicit owner approval for a visibility
-change; do not make the repository public on assumption. Check organization
+Confirm that the public starter can be cloned without credentials. Public read
+access does not grant permission to push changes. Check organization
 restrictions on Copilot and extensions. Validate GitHub, Marketplace, Microsoft
 SDK-download, and NuGet connectivity on the workshop network.
 
@@ -48,7 +47,7 @@ necessary compatibility changes from unrelated "modernization" suggestions.
 
 | Symptom | Diagnose and recover |
 | --- | --- |
-| Private repository not found / clone denied | Confirm account, invitation, organization authentication, and granted access. Do not put credentials in URLs or change visibility without approval. |
+| Repository not found / clone denied | Confirm the public URL, repository availability, and network policy. The public starter needs no credentials to clone. Do not put tokens in URLs or change visibility as a troubleshooting shortcut. |
 | `dotnet` not found / exact SDK missing | Check `dotnet --list-sdks`, `dotnet --info`, and `command -v dotnet` or `Get-Command dotnet`. Install the pinned SDK; restart terminal/VS Code. Check architecture and competing SDK roots. |
 | Baseline selects 9/10 or a preview | Run from the repository root and inspect `global.json`, active `dotnet`, and local changes. Expected source selection is exactly 8.0.425. Do not remove the pin or relax roll-forward. |
 | Runtime missing despite an SDK being present | Check `dotnet --list-runtimes`, `DOTNET_ROOT`, and architecture. SDK listing and actual testhost runtime discovery must agree. Remove unintended runtime major-roll-forward overrides. |
@@ -129,12 +128,12 @@ No scripted/fabricated agent reports are needed.
 | GitHub-hosted CI | Workflow provided, not executed during authoring |
 | VS Code setup and actual agent rehearsal | Not executed during authoring |
 | .NET 10 upgrade execution | Not performed; starter remains net8.0 |
-| Visibility/distribution | Private at authoring; attendee access and owner-authorized distribution remain preparation work |
+| Public distribution | Confirm an unauthenticated clone of the distributed revision before the workshop |
 
 The current machine's global .NET 9 installation was not replaced. Authoring
 commands scoped `DOTNET_ROOT` and `PATH` to a downloaded .NET 8 SDK outside the
 repository. No machine-specific path is required by the committed configuration.
 The clean-source snapshot proves the baseline does not require the authoring
 checkout's build outputs or NuGet cache; it is not a remote attendee clone or a
-VS Code rehearsal. An attendee clone of the distributed revision must still be
-checked after the owner authorizes distribution.
+VS Code rehearsal. An unauthenticated clone of the distributed revision must
+still be checked before the workshop.
