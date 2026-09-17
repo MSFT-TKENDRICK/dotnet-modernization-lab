@@ -14,7 +14,8 @@
     "vscode": {
       "extensions": [
         "GitHub.copilot-chat",
-        "ms-dotnettools.csharp"
+        "ms-dotnettools.csharp",
+        "vscjava.migrate-java-to-azure"
       ]
     }
   },
